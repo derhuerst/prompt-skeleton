@@ -53,9 +53,9 @@ const wrap = (p) => {
 
 	let isClosed = false
 	p.close = () => {
-		if (isClosed) return
-		isClosed = true
-		p.out.unpipe(process.stdout)
+		if (isClosed) return; isClosed = true
+		p.out.write(esc.cursorShow)
+		p.out.unpipe()
 		offKeypress()
 		values.end()
 		values.emit(p.aborted ? 'abort' : 'submit', p.value)

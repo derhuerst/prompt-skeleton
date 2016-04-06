@@ -1,6 +1,6 @@
 {
 	"name":              "prompt-skeleton",
-	"description":       "A consistent feel for CLI prompts.",
+	"description":       "A consistent behavior for CLI prompts.",
 	"version":           "0.1.0",
 	"main":              "index.js",
 	"files":             ["index.js"],
