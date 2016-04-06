@@ -61,7 +61,7 @@ const wrap = (p) => {
 		values.emit(p.aborted ? 'abort' : 'submit', p.value)
 	}
 
-	p.render()
+	p.render(true)
 	return values
 }
 
