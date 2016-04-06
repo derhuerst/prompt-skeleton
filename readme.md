@@ -1,12 +1,14 @@
 # prompt-skeleton
 
-This project aims to bring a **consistent feel to CLI apps**. It provides:
-
-- support dealing with keypress events (control keys, backspace, etc)
+This project aims to bring a **consistent feel to CLI apps**.
 
 [![npm version](https://img.shields.io/npm/v/prompt-skeleton.svg)](https://www.npmjs.com/package/prompt-skeleton)
 [![dependency status](https://img.shields.io/david/derhuerst/prompt-skeleton.svg)](https://david-dm.org/derhuerst/prompt-skeleton#info=dependencies)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/prompt-skeleton.svg)
+
+Instead of letting prompts parse user input by themselves, *prompt-skeleton* provides a [standard set of actions like `submit`](#actions), which prompts can hook into by exposing methods. The key bindings are based on [readline](https://de.wikipedia.org/wiki/GNU_readline).
+
+Also, every prompt using *prompt-skeleton* will expose a [readable stream](http://jannis-mbp.local:57444/Dash/hjthuzjx/nodejs/api/stream.html#stream_class_stream_readable), emitting the current value after every user input.
 
 
 ## Installing
@@ -14,6 +16,29 @@ This project aims to bring a **consistent feel to CLI apps**. It provides:
 ```
 npm install prompt-skeleton
 ```
+
+
+## Usage
+
+```js
+wrap(prompt)
+```
+
+To render to screen, [`write`](http://jannis-mbp.local:57444/Dash/hjthuzjx/nodejs/api/stream.html#stream_writable_write_chunk_encoding_callback) to `this.out`.
+
+To emit both interim and final values, call `this.emit()`. The value in `this.value` will be emitted.
+
+### Actions
+
+You can process any of these actions by exposing a method `this[action]`.
+
+- `first`/`last` – move to the first/last letter/digit
+- `left`/`right`
+- `up`/`down`
+- `delete` – remove letter/digit left to the cursor
+- `space`
+- `submit` – success, close the prompt
+- `abort` – failure, close the prompt
 
 
 ## Contributing
