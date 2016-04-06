@@ -43,10 +43,12 @@ You can process any of these actions by exposing a method `this[action]`.
 - `first`/`last` – move to the first/last letter/digit
 - `left`/`right`
 - `up`/`down`
+- `next` - for tabbing
 - `delete` – remove letter/digit left to the cursor
 - `space`
 - `submit` – success, close the prompt
 - `abort` – failure, close the prompt
+- `reset`
 
 
 ## Contributing
