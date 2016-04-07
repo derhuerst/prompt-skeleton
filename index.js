@@ -1,8 +1,9 @@
 'use strict'
 
 const passStream = require('pass-stream')
-const onKeypress = require('./on-keypress')
 const esc        = require('ansi-escapes')
+
+const onKeypress = require('./on-keypress')
 
 
 
