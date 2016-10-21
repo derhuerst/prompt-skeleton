@@ -15,6 +15,7 @@ Also, every prompt using *prompt-skeleton* will expose a [readable stream](http:
 
 - [number-prompt](https://github.com/derhuerst/number-prompt)
 - [date-prompt](https://github.com/derhuerst/date-prompt)
+- [select-prompt](https://github.com/derhuerst/select-prompt)
 - [multiselect-prompt](https://github.com/derhuerst/multiselect-prompt)
 - [cli-autocomplete](https://github.com/derhuerst/cli-autocomplete)
 
@@ -32,7 +33,7 @@ npm install prompt-skeleton
 wrap(prompt)
 ```
 
-To render to screen, [`write`](http://jannis-mbp.local:57444/Dash/hjthuzjx/nodejs/api/stream.html#stream_writable_write_chunk_encoding_callback) to `this.out`.
+To render to screen, [`write`](https://nodejs.org/Dash/hjthuzjx/nodejs/api/stream.html#stream_writable_write_chunk_encoding_callback) to `this.out`.
 
 To emit both interim and final values, call `this.emit()`. The value in `this.value` will be emitted.
 
