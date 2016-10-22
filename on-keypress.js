@@ -13,8 +13,9 @@ const keypress = (stream, cb) => {
 	stream.on('data', onData)
 
 	return () => {
-		stream.removeListener('data', onData)
 		stream.setRawMode(oldRawMode)
+		stream.pause()
+		stream.removeListener('data', onData)
 	}
 }
 
