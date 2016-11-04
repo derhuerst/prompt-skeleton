@@ -5,12 +5,13 @@ const StringDecoder = require('string_decoder').StringDecoder
 
 
 const keypress = (stream, cb) => {
-	const oldRawMode = stream.isRaw
-	stream.setRawMode(true)
-
 	const decoder = new StringDecoder('utf8')
 	const onData = (data) => cb(parse(decoder.write(data), stream.encoding))
+
+	const oldRawMode = stream.isRaw
+	stream.setRawMode(true)
 	stream.on('data', onData)
+	stream.resume()
 
 	return () => {
 		stream.setRawMode(oldRawMode)

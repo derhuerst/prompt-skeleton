@@ -1,7 +1,7 @@
 {
 	"name":              "prompt-skeleton",
 	"description":       "A consistent behavior for CLI prompts.",
-	"version":           "0.1.2",
+	"version":           "0.1.3",
 	"main":              "index.js",
 	"files":             ["index.js", "on-keypress.js"],
 	"keywords":          ["command", "line", "cli", "prompt", "skeleton", "behavior", "key bindings"],
