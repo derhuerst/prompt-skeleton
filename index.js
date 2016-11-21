@@ -41,6 +41,7 @@ const wrap = (p) => {
 	p.out.pipe(process.stdout)
 
 	p.bell = () => {p.out.write(esc.beep)}
+	if ('function' !== typeof p._) p._ = () => p.bell()
 
 	const values = passStream(null, null, {objectMode: true})
 	p.emit = () => {values.write({
