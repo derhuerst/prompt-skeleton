@@ -13,11 +13,15 @@ Also, every prompt using *prompt-skeleton* will expose a [readable stream](http:
 
 ## Prompts using *prompt-skeleton*
 
-- [number-prompt](https://github.com/derhuerst/number-prompt)
-- [date-prompt](https://github.com/derhuerst/date-prompt)
-- [select-prompt](https://github.com/derhuerst/select-prompt)
-- [multiselect-prompt](https://github.com/derhuerst/multiselect-prompt)
-- [cli-autocomplete](https://github.com/derhuerst/cli-autocomplete)
+- [`date-prompt`](https://github.com/derhuerst/date-prompt)
+- [`mail-prompt`](https://github.com/derhuerst/mail-prompt)
+- [`multiselect-prompt`](https://github.com/derhuerst/multiselect-prompt)
+- [`number-prompt`](https://github.com/derhuerst/number-prompt)
+- [`range-prompt`](https://github.com/derhuerst/range-prompt)
+- [`select-prompt`](https://github.com/derhuerst/select-prompt)
+- [`text-prompt`](https://github.com/derhuerst/text-prompt)
+- [`tree-select-prompt`](https://github.com/derhuerst/tree-select-prompt)
+- [`cli-autocomplete`](https://github.com/derhuerst/cli-autocomplete)
 
 
 ## Installing
