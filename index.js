@@ -49,23 +49,38 @@ const wrap = (p) => {
 		, aborted: !!p.aborted
 	})}
 
-	const offKeypress = onKeypress(process.stdin, (key) => {
+	const onKey = (key) => {
 		let a = action(key)
 		if (a === false) p._(key.raw)
 		else if (a in p) p[a]()
 		else p.out.write(esc.beep)
-	})
+	}
+
+	let offKeypress
+	const pause = () => {
+		if (!offKeypress) return
+		offKeypress()
+		p.out.write(esc.cursorShow)
+		offKeypress = null
+	}
+	p.pause = pause
+	const resume = () => {
+		if (offKeypress) return
+		p.out.write(esc.cursorHide)
+		offKeypress = onKeypress(process.stdin, onKey)
+	}
+	p.resume = resume
 
 	let isClosed = false
 	p.close = () => {
 		if (isClosed) return; isClosed = true
-		p.out.write(esc.cursorShow)
+		pause()
 		p.out.unpipe()
-		offKeypress()
 		values.end()
 		values.emit(p.aborted ? 'abort' : 'submit', p.value)
 	}
 
+	resume()
 	p.render(true)
 	return values
 }
