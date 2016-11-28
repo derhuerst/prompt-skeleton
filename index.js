@@ -60,13 +60,11 @@ const wrap = (p) => {
 	const pause = () => {
 		if (!offKeypress) return
 		offKeypress()
-		p.out.write(esc.cursorShow)
 		offKeypress = null
 	}
 	p.pause = pause
 	const resume = () => {
 		if (offKeypress) return
-		p.out.write(esc.cursorHide)
 		offKeypress = onKeypress(process.stdin, onKey)
 	}
 	p.resume = resume
