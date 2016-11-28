@@ -6,7 +6,11 @@ const StringDecoder = require('string_decoder').StringDecoder
 
 const keypress = (stream, cb) => {
 	const decoder = new StringDecoder('utf8')
-	const onData = (data) => cb(parse(decoder.write(data), stream.encoding))
+	const onData = (data) => {
+		const parsed = parse(decoder.write(data), stream.encoding)
+		if (Array.isArray(parsed)) parsed.forEach((c) => cb(c))
+		else cb(parsed)
+	}
 
 	const oldRawMode = stream.isRaw
 	stream.setRawMode(true)
