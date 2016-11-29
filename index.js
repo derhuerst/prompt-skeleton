@@ -74,6 +74,7 @@ const wrap = (p) => {
 		if (isClosed) return; isClosed = true
 		pause()
 		p.out.unpipe()
+		process.stdout.write(esc.cursorShow)
 		values.end()
 		values.emit(p.aborted ? 'abort' : 'submit', p.value)
 	}
