@@ -11,7 +11,7 @@
 	"license":           "ISC",
 	"engines":           {"node": ">=4"},
 	"dependencies": {
-		"pass-stream":   "^0.1.5",
+		"pass-stream":   "^1.0.0",
 		"ansi-escapes":  "^1.3"
 	}
 }

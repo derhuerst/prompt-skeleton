@@ -52,7 +52,7 @@ const wrap = (p) => {
 	const onKey = (key) => {
 		let a = action(key)
 		if (a === false) p._(key.raw)
-		else if (a in p) p[a](key)
+		else if ('function' === typeof p[a]) p[a](key)
 		else p.out.write(esc.beep)
 	}
 

@@ -14,6 +14,7 @@ Also, every prompt using *prompt-skeleton* will expose a [readable stream](http:
 
 ## Prompts using *prompt-skeleton*
 
+- [`sms-cli`](https://github.com/derhuerst/sms-cli)
 - [`date-prompt`](https://github.com/derhuerst/date-prompt)
 - [`mail-prompt`](https://github.com/derhuerst/mail-prompt)
 - [`multiselect-prompt`](https://github.com/derhuerst/multiselect-prompt)
@@ -24,6 +25,8 @@ Also, every prompt using *prompt-skeleton* will expose a [readable stream](http:
 - [`tree-select-prompt`](https://github.com/derhuerst/tree-select-prompt)
 - [`cli-autocomplete`](https://github.com/derhuerst/cli-autocomplete)
 - [`switch-prompt`](https://github.com/derhuerst/switch-prompt)
+
+Use [`cli-prompter`](https://github.com/ahdinosaur/cli-prompter) if you want to have batteries included of if you want to chain prompts.
 
 
 ## Installing
