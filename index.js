@@ -1,6 +1,6 @@
 'use strict'
 
-const passStream = require('pass-stream')
+const differ = require('ansi-diff-stream')
 const esc = require('ansi-escapes')
 const onKeypress = require('@derhuerst/cli-on-key')
 
@@ -32,7 +32,7 @@ const action = (key) => {
 }
 
 const wrap = (p) => {
-	p.out = passStream()
+	p.out = differ()
 	p.out.pipe(process.stdout)
 
 	p.bell = () => {

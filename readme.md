@@ -40,11 +40,11 @@ npm install prompt-skeleton
 wrap(prompt) // Promise
 ```
 
-To render to screen, [`write`](https://nodejs.org/Dash/hjthuzjx/nodejs/api/stream.html#stream_writable_write_chunk_encoding_callback) to `this.out`.
+To render to screen, [`write`](https://nodejs.org/api/stream.html#stream_writable_write_chunk_encoding_callback) to `prompt.out`. Because `prompt.out` is a [`ansi-diff-stream`](https://www.npmjs.com/package/ansi-diff-stream#usage), you can also clear the screen manually be calling `prompt.out.clear()`.
 
 ### Actions
 
-You can process any of these actions by exposing a method `this[action]`.
+You can process any of these actions by exposing a method `prompt[action]`.
 
 - `first`/`last` – move to the first/last letter/digit
 - `left`/`right`
@@ -74,7 +74,7 @@ const prompt = wrap({
 		this.render()
 	},
 	render: function () {
-		this.out.write(this.value + '')
+		this.out.write(`The value is ${this.value}.`)
 	}
 })
 
