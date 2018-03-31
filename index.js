@@ -48,6 +48,7 @@ const wrap = (p) => {
 
 	const onKey = (key) => {
 		let a = action(key)
+		if (a === 'abort') return p.close()
 		if (a === false) p._(key.raw)
 		else if ('function' === typeof p[a]) p[a](key)
 		else p.out.write(esc.beep)
@@ -58,20 +59,21 @@ const wrap = (p) => {
 		if (!offKeypress) return
 		offKeypress()
 		offKeypress = null
+		process.stdout.write(esc.cursorShow)
 	}
 	p.pause = pause
 	const resume = () => {
 		if (offKeypress) return
 		offKeypress = onKeypress(process.stdin, onKey)
+		process.stdout.write(esc.cursorHide)
 	}
 	p.resume = resume
 
 	let isClosed = false
 	p.close = () => {
 		if (isClosed) return; isClosed = true
+		p.out.unpipe(process.stdout)
 		pause()
-		p.out.unpipe()
-		process.stdout.write(esc.cursorShow)
 		values.end()
 		values.emit(p.aborted ? 'abort' : 'submit', p.value)
 	}
