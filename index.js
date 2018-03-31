@@ -1,11 +1,9 @@
 'use strict'
 
 const passStream = require('pass-stream')
-const esc        = require('ansi-escapes')
+const esc = require('ansi-escapes')
 
 const onKeypress = require('./on-keypress')
-
-
 
 const action = (key) => {
 	let code = key.raw.charCodeAt(0)
@@ -34,14 +32,14 @@ const action = (key) => {
 	return false
 }
 
-
-
 const wrap = (p) => {
 	p.out = passStream()
 	p.out.pipe(process.stdout)
 
-	p.bell = () => {p.out.write(esc.beep)}
-	if ('function' !== typeof p._) p._ = () => p.bell()
+	p.bell = () => {
+		p.out.write(esc.beep)
+	}
+	if ('function' !== typeof p._) p._ = p.bell
 
 	const values = passStream(null, null, {objectMode: true})
 	p.emit = () => {values.write({
