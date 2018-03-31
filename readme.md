@@ -9,8 +9,6 @@ This project aims to bring a **consistent behavior to CLI apps**.
 
 Instead of letting prompts parse user input by themselves, *prompt-skeleton* provides a [standard set of actions like `submit`](#actions), which prompts can act on by exposing methods. The key bindings are [readline](https://de.wikipedia.org/wiki/GNU_readline)-inspired.
 
-Also, every prompt using *prompt-skeleton* will expose a [readable stream](http://jannis-mbp.local:57444/Dash/hjthuzjx/nodejs/api/stream.html#stream_class_stream_readable), emitting the current value after every user input as well as an `submit` or `abort` event.
-
 
 ## Prompts using *prompt-skeleton*
 
@@ -39,12 +37,10 @@ npm install prompt-skeleton
 ## Usage
 
 ```js
-wrap(prompt)
+wrap(prompt) // Promise
 ```
 
 To render to screen, [`write`](https://nodejs.org/Dash/hjthuzjx/nodejs/api/stream.html#stream_writable_write_chunk_encoding_callback) to `this.out`.
-
-To emit both interim and final values, call `this.emit()`. The value in `this.value` will be emitted.
 
 ### Actions
 
@@ -71,22 +67,23 @@ const prompt = wrap({
 	value: 0,
 	up: function () {
 		this.value++
-		this.emit() // send `data` event
-		this.out.write(this.value + '\n') // render to `stdout`
+		this.render()
 	},
 	down: function () {
 		this.value--
-		this.emit() // send `data` event
-		this.out.write(this.value + '\n') // render to `stdout`
+		this.render()
+	},
+	render: function () {
+		this.out.write(this.value + '')
 	}
 })
 
 prompt
-.on('submit', (value) => {
-	// do something with the value
+.then((val) => {
+	// prompt succeeded, do something with the value
 })
-.on('abort', (value) => {
-	// do something with the value
+.catch((val) => {
+	// prompt aborted, do something with the value
 })
 ```
 

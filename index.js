@@ -40,12 +40,6 @@ const wrap = (p) => {
 	}
 	if ('function' !== typeof p._) p._ = p.bell
 
-	const values = passStream(null, null, {objectMode: true})
-	p.emit = () => {values.write({
-		  value:   p.value
-		, aborted: !!p.aborted
-	})}
-
 	const onKey = (key) => {
 		let a = action(key)
 		if (a === 'abort') return p.close()
@@ -69,20 +63,23 @@ const wrap = (p) => {
 	}
 	p.resume = resume
 
-	let isClosed = false
-	p.close = () => {
-		if (isClosed) return; isClosed = true
-		p.out.unpipe(process.stdout)
-		pause()
-		values.end()
-		values.emit(p.aborted ? 'abort' : 'submit', p.value)
-	}
+	return new Promise((resolve, reject) => {
+		let isClosed = false
+		p.close = () => {
+			if (isClosed) return null
+			isClosed = true
 
-	resume()
-	p.render(true)
-	return values
+			p.out.unpipe(process.stdout)
+			pause()
+
+			if (p.aborted) reject(p.value)
+			else resolve(p.value)
+		}
+
+		if ('function' !== typeof p.submit) p.submit = p.close
+		resume()
+		p.render(true)
+	})
 }
-
-
 
 module.exports = Object.assign(wrap, {action})
