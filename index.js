@@ -2,8 +2,7 @@
 
 const passStream = require('pass-stream')
 const esc = require('ansi-escapes')
-
-const onKeypress = require('./on-keypress')
+const onKeypress = require('@derhuerst/cli-on-key')
 
 const action = (key) => {
 	let code = key.raw.charCodeAt(0)

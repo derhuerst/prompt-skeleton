@@ -4,8 +4,7 @@
 	"version": "0.6.0",
 	"main": "index.js",
 	"files": [
-		"index.js",
-		"on-keypress.js"
+		"index.js"
 	],
 	"keywords": [
 		"command",
@@ -24,6 +23,7 @@
 		"node": ">=4"
 	},
 	"dependencies": {
+		"@derhuerst/cli-on-key": "^0.1.0",
 		"ansi-escapes": "^3.1.0",
 		"pass-stream": "^1.0.0"
 	}
