@@ -2,6 +2,8 @@
 
 This project aims to bring a **consistent behavior to CLI apps**.
 
+Use [`cli-prompter`](https://github.com/ahdinosaur/cli-prompter) if you want to have batteries included or if you want to chain prompts.
+
 [![npm version](https://img.shields.io/npm/v/prompt-skeleton.svg)](https://www.npmjs.com/package/prompt-skeleton)
 [![dependency status](https://img.shields.io/david/derhuerst/prompt-skeleton.svg)](https://david-dm.org/derhuerst/prompt-skeleton#info=dependencies)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/prompt-skeleton.svg)
@@ -10,7 +12,9 @@ This project aims to bring a **consistent behavior to CLI apps**.
 Instead of letting prompts parse user input by themselves, *prompt-skeleton* provides a [standard set of actions like `submit`](#actions), which prompts can act on by exposing methods. The key bindings are [readline](https://de.wikipedia.org/wiki/GNU_readline)-inspired.
 
 
-## Prompts using *prompt-skeleton*
+## Projects using `prompt-skeleton`
+
+Prompts:
 
 - [`sms-cli`](https://github.com/derhuerst/sms-cli)
 - [`date-prompt`](https://github.com/derhuerst/date-prompt)
@@ -24,7 +28,13 @@ Instead of letting prompts parse user input by themselves, *prompt-skeleton* pro
 - [`cli-autocomplete`](https://github.com/derhuerst/cli-autocomplete)
 - [`switch-prompt`](https://github.com/derhuerst/switch-prompt)
 
-Use [`cli-prompter`](https://github.com/ahdinosaur/cli-prompter) if you want to have batteries included of if you want to chain prompts.
+Other command line interfaces:
+
+- [`really-basic-chat-ui`](https://github.com/derhuerst/really-basic-chat-ui)
+- [`command-irail`](https://github.com/iRail/command-irail)
+- [`cli-2048`](https://github.com/derhuerst/cli-2048)
+- [`cli-minesweeper`](https://github.com/derhuerst/cli-minesweeper)
+- [`tiny-cli-editor`](https://github.com/derhuerst/tiny-cli-editor)
 
 
 ## Installing
