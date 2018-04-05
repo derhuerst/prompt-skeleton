@@ -3,6 +3,7 @@
 const differ = require('ansi-diff-stream')
 const esc = require('ansi-escapes')
 const onKeypress = require('@derhuerst/cli-on-key')
+const termSize = require('window-size').get
 
 const action = (key) => {
 	let code = key.raw.charCodeAt(0)
@@ -31,6 +32,14 @@ const action = (key) => {
 	return false
 }
 
+const onResize = (stream, cb) => {
+	stream.on('resize', cb)
+	const stopListening = () => {
+		stream.removeListener('resize', cb)
+	}
+	return stopListening
+}
+
 const wrap = (p) => {
 	p.out = differ()
 	p.out.pipe(process.stdout)
@@ -48,17 +57,26 @@ const wrap = (p) => {
 		else p.out.write(esc.beep)
 	}
 
-	let offKeypress
+	const onNewSize = () => {
+		const {width, height} = termSize()
+		p.out.reset()
+		p.render(true)
+	}
+
+	let offKeypress, offResize
 	const pause = () => {
 		if (!offKeypress) return
 		offKeypress()
 		offKeypress = null
+		offResize()
+		offResize = null
 		process.stdout.write(esc.cursorShow)
 	}
 	p.pause = pause
 	const resume = () => {
 		if (offKeypress) return
 		offKeypress = onKeypress(process.stdin, onKey)
+		offResize = onResize(process.stdout, onNewSize)
 		process.stdout.write(esc.cursorHide)
 	}
 	p.resume = resume

@@ -12,8 +12,9 @@ const prompt = wrap({
 		this.value--
 		this.render()
 	},
+	calls: 0,
 	render: function () {
-		this.out.write(`The value is ${this.value}.`)
+		this.out.write(`The value is ${this.value}. – ${this.calls++} calls`)
 	}
 })
 
