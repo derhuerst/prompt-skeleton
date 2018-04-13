@@ -93,6 +93,7 @@ const wrap = (p) => {
 			if (p.aborted) reject(p.value)
 			else resolve(p.value)
 		}
+		process.on('beforeExit', () => p.close())
 
 		if ('function' !== typeof p.submit) p.submit = p.close
 		resume()
