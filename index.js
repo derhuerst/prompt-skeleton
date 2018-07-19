@@ -52,11 +52,9 @@ const onResize = (stream, cb) => {
 	return stopListening
 }
 
-/**
- * @param {*} p
- * @param {boolean} v whether or not to attempt to parse vim keybindings
- */
-const wrap = (p, v = false) => {
+const wrap = (p, opt = {}) => {
+	opt = Object.assign({vimBindings: false}, opt)
+
 	p.out = differ()
 	p.out.pipe(process.stdout)
 
@@ -66,7 +64,7 @@ const wrap = (p, v = false) => {
 	if ('function' !== typeof p._) p._ = p.bell
 
 	const onKey = (key) => {
-		let a = action(key, v)
+		let a = action(key, opt.vimBindings)
 		if (a === 'abort') return p.close()
 		if (a === false) p._(key.raw)
 		else if ('function' === typeof p[a]) p[a](key)
