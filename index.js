@@ -45,7 +45,7 @@ const wrap = (p) => {
 	p.out.pipe(process.stdout)
 
 	p.bell = () => {
-		p.out.write(esc.beep)
+		if (!p.out._writableState.ended) p.out.write(esc.beep)
 	}
 	if ('function' !== typeof p._) p._ = p.bell
 
@@ -54,7 +54,7 @@ const wrap = (p) => {
 		if (a === 'abort') return p.close()
 		if (a === false) p._(key.raw)
 		else if ('function' === typeof p[a]) p[a](key)
-		else p.out.write(esc.beep)
+		else if (!p.out._writableState.ended) p.out.write(esc.beep)
 	}
 
 	const onNewSize = () => {
