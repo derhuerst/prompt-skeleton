@@ -5,7 +5,13 @@ const esc = require('ansi-escapes')
 const onKeypress = require('@derhuerst/cli-on-key')
 const termSize = require('window-size').get
 
-const action = (key) => {
+/**
+ * @param {*} key
+ * @param {boolean} vimBindings whether or not to enable vim keybindings
+ */
+const action = (key, vimBindings = false) => {
+	if (!key.raw) return false
+
 	let code = key.raw.charCodeAt(0)
 
 	if (key.ctrl) {
@@ -28,6 +34,12 @@ const action = (key) => {
 	if (key.name === 'left')      return 'left'
 	if (code === 8747)            return 'left'  // alt + B
 	if (code === 402)             return 'right' // alt + F
+	if (vimBindings) {
+		if (key.name === 'k')     return 'up'
+		if (key.name === 'j')     return 'down'
+		if (key.name === 'l')     return 'right'
+		if (key.name === 'h')     return 'left'
+	}
 
 	return false
 }
@@ -40,7 +52,9 @@ const onResize = (stream, cb) => {
 	return stopListening
 }
 
-const wrap = (p) => {
+const wrap = (p, opt = {}) => {
+	opt = Object.assign({vimBindings: false}, opt)
+
 	p.out = differ()
 	p.out.pipe(process.stdout)
 
@@ -50,7 +64,7 @@ const wrap = (p) => {
 	if ('function' !== typeof p._) p._ = p.bell
 
 	const onKey = (key) => {
-		let a = action(key)
+		let a = action(key, opt.vimBindings)
 		if (a === 'abort') return p.close()
 		if (a === false) p._(key.raw)
 		else if ('function' === typeof p[a]) p[a](key)
